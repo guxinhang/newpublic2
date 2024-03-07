@@ -1,44 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-http
+  name: oxcart
   labels:
-    app: todo-http
-    name: todo-http
-  namespace: network-ingress
+    app: oxcart
+    name: oxcart
+  namespace: area51
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: todo-http
-      name: todo-http
+      app: oxcart
+      name: oxcart
   template:
     metadata:
       labels:
-        app: todo-http
-        name: todo-http
+        app: oxcart
+        name: oxcart
     spec:
       containers:
       - resources:
           limits:
             cpu: '0.5'
         image: registry.ocp4.example.com:8443/redhattraining/todo-angular:v1.1
-        name: todo-http
+        name: oxcart
         ports:
         - containerPort: 8080
-          name: todo-http
+          name: oxcart
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: todo-http
-    name: todo-http
-  name: todo-http
+    app: oxcart
+    name: oxcart
+  name: oxcart
 spec:
   ports:
   - port: 80
     protocol: TCP
     targetPort: 8080
   selector:
-    name: todo-http
+    name: oxcart
